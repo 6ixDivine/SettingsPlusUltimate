@@ -3,7 +3,7 @@
 // @namespace    SettingsPlus
 // @version      3.1.1
 // @description  Cookie Clicker utility mod
-// @author       6ixDivine
+// @author       10tx
 // @match        https://orteil.dashnet.org/cookieclicker/*
 // @match        https://cookieclicker.ee/*
 // @grant        none
