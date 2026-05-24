@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Settings Plus
 // @namespace    SettingsPlus
-// @version      3.1.1
+// @version      3.1.2
 // @description  Cookie Clicker utility mod
 // @author       10tx
 // @match        https://orteil.dashnet.org/cookieclicker/*
