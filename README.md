@@ -12,4 +12,5 @@ A TamperMonkey script for Cookie Clicker that adds QOL options, a utility menu a
 
 ### Changelog
 1. Added toggle keybind button
+2. CPS counter now counts auto clicker clicks
 
