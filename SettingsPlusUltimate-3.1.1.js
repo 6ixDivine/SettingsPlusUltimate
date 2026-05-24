@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Settings Plus
 // @namespace    SettingsPlus
-// @version      4.0.0
-// @description  Cookie Clicker utility suite with CPS HUD, autobuy, automation, and themed UI
+// @version      3.1.1
+// @description  Cookie Clicker utility mod
 // @author       6ixDivine
 // @match        https://orteil.dashnet.org/cookieclicker/*
 // @match        https://cookieclicker.ee/*
