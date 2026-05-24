@@ -40,7 +40,7 @@
         buyBuilding: "Cursor",
         buyInterval: 1,
 
-        cpsGuiVisible: true,
+        cpsGuiVisible: false,
         cheatMenuVisible: false,
 
         cpsHudX: 20,
