@@ -1,4 +1,4 @@
-# SettingsPlusUltimate
+# SettingsPlus
 
 ### Description
 A TamperMonkey script for Cookie Clicker that adds QOL options, a cheat menu and a CPS counter GUI.
@@ -11,4 +11,5 @@ A TamperMonkey script for Cookie Clicker that adds QOL options, a cheat menu and
 "F6" - Toggle Auto Clicker
 
 ### Changelog
-1. Combined CPSGUI, 6ixMenu and SettingsPlus into one.
+1. Update both cheat and cps GUIs
+2. Added Auto Reindeer - settings menu & Spawn reindeer - cheat menu
