@@ -1,4 +1,4 @@
-# SettingsPlus
+# SettingsPlusUltimate
 
 ### Description
 A TamperMonkey script for Cookie Clicker that adds QOL options, a cheat menu and a CPS counter GUI.
