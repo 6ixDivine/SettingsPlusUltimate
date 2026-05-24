@@ -11,5 +11,5 @@ A TamperMonkey script for Cookie Clicker that adds QOL options, a utility menu a
 "F6" - Toggle Auto Clicker
 
 ### Changelog
-no changes from release yet
+1. Added toggle keybind button
 
