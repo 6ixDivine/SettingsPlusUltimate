@@ -11,5 +11,5 @@ A TamperMonkey script for Cookie Clicker that adds QOL options, a utility menu a
 "F6" - Toggle Auto Clicker
 
 ### Changelog
-1. Update both utility and cps GUIs
+1. Updated both utility and cps GUIs
 2. Added Auto Reindeer - settings menu & Spawn reindeer - utility gui
