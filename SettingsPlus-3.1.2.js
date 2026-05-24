@@ -40,8 +40,10 @@
         buyBuilding: "Cursor",
         buyInterval: 1,
 
-        cpsGuiVisible: true,
+        cpsGuiVisible: false,
         cheatMenuVisible: false,
+
+        keybindsEnabled: true,
 
         cpsHudX: 20,
         cpsHudY: 20,
@@ -267,6 +269,12 @@
             </div>
 
             <div class="listing">
+                <a class="option" id="toggleKeybinds">
+                    Keybinds (${config.keybindsEnabled ? "ON" : "OFF"})
+                </a>
+            </div>
+
+            <div class="listing">
                 <div class="option">
                     <span>Building:</span>
 
@@ -352,9 +360,14 @@
         document.getElementById("toggleCheatMenu")
             .addEventListener("click", toggleCheatMenu);
 
+        document.getElementById("toggleKeybinds")
+            .addEventListener("click", toggleKeybinds);
+
         document.getElementById("UnloadBtn")
             .addEventListener("click", unload);
     }
+
+    let clicks = [];
 
     function startMasterLoop() {
         if (masterLoop) return;
@@ -365,9 +378,11 @@
 
             if (config.autoclick && !Game.OnAscend) {
                 Game.ClickCookie();
+
+                clicks.push(Date.now());
             }
 
-            for (const s of Game.shimmers || []) {
+            for (const s of [...(Game.shimmers || [])]) {
 
                 if (
                     (config.autoGolden && s.type === "golden") ||
@@ -428,13 +443,6 @@
         saveSettings();
 
         updateMenuState();
-
-        notify(
-            "Settings Plus",
-            config.autoclick
-                ? "Auto Click Enabled"
-                : "Auto Click Disabled"
-        );
     }
 
     function toggleGolden() {
@@ -469,13 +477,28 @@
         updateMenuState();
     }
 
+    function toggleKeybinds() {
+
+        config.keybindsEnabled =
+            !config.keybindsEnabled;
+
+        saveSettings();
+
+        updateMenuState();
+
+        notify(
+            "Settings Plus",
+            config.keybindsEnabled
+                ? "Keybinds Enabled"
+                : "Keybinds Disabled"
+        );
+    }
+
     function updateMenuState() {
         if (Game.onMenu === "prefs") {
             injectUI();
         }
     }
-
-    let clicks = [];
 
     let cpsHud = null;
 
@@ -525,7 +548,10 @@
         const bigCookie = document.getElementById("bigCookie");
 
         if (bigCookie) {
-            addListener(bigCookie, "mousedown", () => {
+            addListener(bigCookie, "mousedown", e => {
+
+                if (e.button !== 0) return;
+
                 clicks.push(Date.now());
             });
         }
@@ -626,32 +652,6 @@
             })
         );
 
-        body.appendChild(
-            createButton("Unlock All Achievements", () => {
-
-                Object.values(Game.AchievementsById).forEach(a => {
-                    Game.Win(a.name);
-                });
-            })
-        );
-
-        body.appendChild(
-            createButton("Unlock All Upgrades", () => {
-
-                Object.values(Game.UpgradesById).forEach(upgrade => {
-
-                    if (
-                        !upgrade.bought &&
-                        upgrade.pool !== "prestige"
-                    ) {
-                        upgrade.unlock();
-
-                        upgrade.buy(true);
-                    }
-                });
-            })
-        );
-
         cheatMenu.appendChild(header);
 
         cheatMenu.appendChild(body);
@@ -703,8 +703,14 @@
 
             if (!dragging) return;
 
-            const x = e.clientX - offsetX;
-            const y = e.clientY - offsetY;
+            let x = e.clientX - offsetX;
+            let y = e.clientY - offsetY;
+
+            const maxX = window.innerWidth - element.offsetWidth;
+            const maxY = window.innerHeight - element.offsetHeight;
+
+            x = Math.max(0, Math.min(maxX, x));
+            y = Math.max(0, Math.min(maxY, y));
 
             element.style.left = x + "px";
             element.style.top = y + "px";
@@ -722,6 +728,8 @@
         addListener(document, "keydown", e => {
 
             if (destroyed) return;
+
+            if (!config.keybindsEnabled) return;
 
             switch (e.key) {
 
@@ -757,6 +765,10 @@
         clearInterval(buyLoop);
         clearInterval(cpsLoop);
 
+        masterLoop = null;
+        buyLoop = null;
+        cpsLoop = null;
+
         cleanupListeners();
 
         if (originalUpdateMenu && Game) {
@@ -771,9 +783,12 @@
 
         cheatMenu?.remove();
 
+        delete window.__SETTINGS_PLUS__;
+
         notify("Settings Plus", "Unloaded");
     }
 
     waitForGame();
 
 })();
+
