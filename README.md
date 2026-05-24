@@ -8,4 +8,4 @@
 "F6" - Toggle Auto Clicker
 
 ## Changelog
-1. Combined CPSGUI,6ixMenu and SettingsPlus into one.
+1. Combined CPSGUI, 6ixMenu and SettingsPlus into one.
